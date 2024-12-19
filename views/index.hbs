@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <title>Travel Memories</title>
+    <link rel="stylesheet" href="/stylesheets/style.css">
+  </head>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Zilla+Slab&display=swap');
+</style>
+  <body>
+    <div id="welcomeScreen">
+      <div>
+        <h1>Welcome to Travel Memories!</h1>
+        <p> Capture your journeys and relive your adventures with Travel Memories, your personal travel diary. Here, you can:
+        <ul>
+          <li> Add new travel entries to document the places you've visited. </li>
+          <li> Edit your posts to update details or add memories. </li>
+          <li> Delete entries you no longer need. </li> 
+        </ul>
+        Tag your travels, share your experiences, and organize your journeys effortlessly — from the bustling cities to serene landscapes, every memory has its place here.
+        <br> 
+        Start creating your travel diary today! 🌍✈️ </p>
+        <h2>Click anywhere to continue...</h2>
+      </div>
+    </div>
+
+    <div id="contentWrapper" style="visibility: hidden;">
+      <div id="overlay"></div>
+      <div class="wavy-circle">
+        <button id="postButton">Add <br> New Post</button>
+      </div>
+
+      <div id="backToWelcomePageContainer" style="position: absolute; bottom: 20px; right: 20px;">
+        <button class="button-74" role="button" id="backToWelcomeButton">Back to Welcome Page</button>
+      </div>
+
+      <div id="tag-filter-container" class="scroll-container" >
+        {{#if tags}}
+          {{#each tags}}
+            <button class="tag-button" data-tag="{{this}}" onclick="filterPosts('{{this}}')">{{this}}</button>
+          {{/each}}
+        {{/if}}
+      </div>
+
+      {{#if posts}}
+        <div id="posts-container">
+          {{#each posts}}
+            <div class="post" data-tags="{{#each postTags}}{{this.tagName}}{{#unless @last}},{{/unless}}{{/each}}">
+              <div class="buttonContainer">
+                <div class="edit">
+                  <button class="editButton">
+                    <i class="far fa-edit"></i>
+                  </button>
+                </div>
+                <div class="delete">
+                  <button class="deleteButton" onclick="deletePost('{{this._id}}')">
+                    <i class="fa fa-close"></i>
+                  </button>
+                </div>
+              </div>
+              <h2>{{title}}</h2>
+              <form onsubmit="updatePost(event, '{{this._id}}')" style="display: none;">
+                  <input type="text" name="title" value="{{this.title}}" placeholder="Title">
+                  <input type="text" name="from" value="{{this.from}}" placeholder="From">
+                  <input type="text" name="to" value="{{this.to}}" placeholder="To">
+                  <textarea name="description" placeholder="Description">{{this.description}}</textarea>
+                  <input type="text" name="tags" value="{{#each postTags}}{{this.tagName}}{{#unless @last}},{{/unless}}{{/each}}" placeholder="Tags (comma separated)">
+                  <button type="submit">Update Post</button>
+              </form>
+              
+              <button class="toggle-details" onclick="toggleDetails(this)">
+                <i class="fa fa-caret-down"></i>
+              </button>
+              <div class="post-details hidden">
+                {{#if postTags}}
+                  <div class="tags">
+                    <ul>
+                      {{#each postTags}}
+                        <li class="tag-{{this.tagName}}">{{this.tagName}}</li>
+                      {{/each}}
+                    </ul>
+                  </div>
+                {{/if}}
+                <p><strong>{{from}} to {{to}}</strong></p>
+                <p>{{description}}</p>
+                <button class="toggle-details" onclick="toggleDetails(this)">
+                  <i class="fa fa-caret-up"></i>
+                </button>
+              </div>
+            </div>
+          {{/each}}
+        </div>
+      {{/if}}
+
+      <div id="new-post-form" style="display: none;">
+        <button id="closeFormButton" class="close-button"><i class="fa fa-close"></i></button>
+        <form action="/" method="POST">
+          <label for="title">Title:</label><br>
+          <input type="text" id="title" name="title">
+
+          <label for="from">From:</label><br>
+          <input type="text" id="from" name="from">
+
+          <label for="to">To:</label><br>
+          <input type="text" id="to" name="to">
+
+          <label for="description">Description:</label><br>
+          <textarea id="description" name="description"></textarea>
+
+          <label for="tags">Tags (comma separated):</label><br>
+          <input type="text" id="tags" name="tags">
+          <button type="submit">Submit</button>
+        </form>
+      </div>
+      
+      <div id="instructions-container">
+        <button id="instructions-toggle" class="button-74">Instructions</button>
+        <div id="instructions-box" class="hidden">
+          <h3>Instructions</h3>
+          <ul>
+            <li>Click "Add New Post" to create a new travel entry.</li>
+            <li>Use tags to filter posts.</li>
+            <li>Drag and click on a post to view more details.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <script src="/javascripts/script.js"></script>
+  </body>
+</html>

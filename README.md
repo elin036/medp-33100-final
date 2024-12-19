@@ -2,32 +2,36 @@
 
 ## **Project Overview**
 
-- Briefly describe the concept of your project.
+- Our vision was to create a digital travel journal where users save past trips and dream destinations. Users can add their thoughts with tags, dates, and edit or delete their post later.
 
 ## **Project Members**
 
-- List the people a part of this group.
+- Erika Lin & Linda Yu
 
 ## **Features**
 
-- List the key features of the project (the three distinct types of user interactions).
+- Users can create new post, edit their post later, delete post they don't like and drag posts across the screen.
+- Instructions drop down button to let users understand how to use the app
+- Filter posts based on their tags 
 
 ## **Technologies Used**
 
 - List the technologies and tools used in the project:
     - APIs
-    - Libraries
-    - Other
+    - MongoBD
+    - Google Fonts
+    - Glitch & GitHub
+    - CSS Scan for buttons 
  
 ## **Live Demo**
 
-- Include a link to the live version of the project hosted on Glitch.
+- https://finalmedp.glitch.me
 
 ## **Credits**
 
-- List any third-party assets used in the project (e.g., sound effects, images, fonts) and provide proper attribution.
-- Acknowledge any resources, tutorials, or references you used to help complete the project.
+- CSS Scan for buttons 
 
 ## **Future Enhancements**
 
-- List any future enhancements you would like to make or improve given more time.
+- Allow users to add image or photos (we had issues on how to include  
+- Make it more interactive for users such as adding emoji or an reaction box
